@@ -4,8 +4,64 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MedsManager"
+    xmlns:fontAwesome="clr-namespace:MedsManager.Helpers"
     Shell.FlyoutBehavior="Disabled"
     Title="MedsManager">
+
+    <TabBar>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAS"
+                          Color="{AppThemeBinding 
+                                 Dark=White, 
+                                 Light={StaticResource SystemGray5Dark}}"
+                          Glyph="{x:Static fontAwesome:FontAwesomeIcons.House}"/>
+            </Tab.Icon>
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="HomePage" />
+        </Tab>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAS"
+                          Color="{AppThemeBinding 
+                                 Dark=White, 
+                                 Light={StaticResource SystemGray5Dark}}"
+                          Glyph="{x:Static fontAwesome:FontAwesomeIcons.Pills}"/>
+            </Tab.Icon>
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="SearchPage" />
+        </Tab>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAR"
+                          Color="{AppThemeBinding 
+                                 Dark=White, 
+                                 Light={StaticResource SystemGray5Dark}}"
+                          Glyph="{x:Static fontAwesome:FontAwesomeIcons.CalendarDays}"/>
+            </Tab.Icon>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="NewThreadPage" />
+        </Tab>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAR"
+                          Color="{AppThemeBinding 
+                                 Dark=White, 
+                                 Light={StaticResource SystemGray5Dark}}"
+                          Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
+            </Tab.Icon>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="ProfilePage" />
+        </Tab>
+
+
+    </TabBar>
 
     <ShellContent
         Title="Home"
