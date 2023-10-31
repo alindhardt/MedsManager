@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MedsManager.Helpers;
+using MedsManager.Services;
+using Microsoft.Extensions.Logging;
 
 namespace MedsManager
 {
@@ -21,7 +23,9 @@ namespace MedsManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddPages();
+            builder.Services.AddViewModels();
+            builder.Services.AddRepositories();
             return builder.Build();
         }
     }

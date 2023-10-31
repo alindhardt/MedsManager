@@ -5,11 +5,14 @@
              xmlns:viewModels="clr-namespace:MedsManager.ViewModels"
              Title="Meds">
     <VerticalStackLayout>
-        <Label 
-            Text="Medicines will be here!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <ListView x:Name="listMeds" HasUnevenRows="True" ItemsSource="{Binding Meds}" SelectionMode="None">
+        <ListView 
+            x:Name="listMeds" 
+            HasUnevenRows="True" 
+            ItemsSource="{Binding Meds}" 
+            SelectionMode="None"
+            RefreshCommand="{Binding LoadMedsCommand}"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsRetrievingMeds}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell BindingContext="">

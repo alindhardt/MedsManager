@@ -1,31 +1,32 @@
-﻿using MedsManager.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MedsManager.Models;
+using MedsManager.Services;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace MedsManager.ViewModels;
 
-public class MedicineListPageViewModel : INotifyPropertyChanged
+public partial class MedicineListPageViewModel : ObservableObject
 {
-    public MedicineListPageViewModel()
-    {
-        Meds.AddRange(new[]
-        {
-            new Medicine
-            {
-                Id= Guid.NewGuid(),
-                Name = "Blue pill",
-                Description = "You wake up in your bed and believe whatever you want to believe."
-            },
-            new Medicine
-            {
-                Id = Guid.NewGuid(),
-                Name = "Red pill",
-                Description = "You stay in Wonderland, and I show you how deep the rabbit hole goes."
-            }
-        });
+    private readonly IMedicineRepository medicineRepository;
 
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Meds)));
+    public MedicineListPageViewModel(IMedicineRepository medicineRepository)
+    {
+        this.medicineRepository = medicineRepository;
+        LoadMedsCommand = new Command(async () => await LoadMedsAsync());
     }
 
-    public List<Medicine> Meds { get; set; } = new();
-    public event PropertyChangedEventHandler PropertyChanged;
+    [ObservableProperty]
+    ObservableCollection<Medicine> meds = new();
+
+    [ObservableProperty]
+    bool isRetrievingMeds;
+
+    public Command LoadMedsCommand { get; }
+    public async Task LoadMedsAsync()
+    {
+        IsRetrievingMeds = true;
+        Meds = new ObservableCollection<Medicine>(await medicineRepository.GetAllMedsAsync());
+        IsRetrievingMeds = false;
+    }
 }
