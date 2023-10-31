@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MedsManager"
     xmlns:fontAwesome="clr-namespace:MedsManager.Helpers"
+    xmlns:pages="clr-namespace:MedsManager.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="MedsManager">
 
@@ -30,8 +31,8 @@
                           Glyph="{x:Static fontAwesome:FontAwesomeIcons.Pills}"/>
             </Tab.Icon>
             <ShellContent
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="SearchPage" />
+                ContentTemplate="{DataTemplate pages:MedicineListPage}"
+                Route="MedicineListPage" />
         </Tab>
         <Tab>
             <Tab.Icon>
