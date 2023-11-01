@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlexLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Name="this"
+            x:Class="MedsManager.Controls.FlexLayoutTextCarousel"
+            JustifyContent="SpaceBetween" 
+            AlignContent="Center">
+    <Button 
+        BackgroundColor="Transparent"
+        TextColor="Black"
+        FontFamily="FAS" 
+        Text="angle-left"
+        MaximumHeightRequest="20" 
+        Padding="0"
+        Command="{Binding Source={x:Reference this}, Path=PreviousCommand}"/>
+    <Label 
+        Text="{Binding Source={x:Reference this}, Path=Text}"
+        TextColor="{Binding Source={x:Reference this}, Path=TextColor}"/>
+    <Button 
+        BackgroundColor="Transparent"
+        TextColor="Black"
+        FontFamily="FAS" 
+        Text="angle-right"
+        MaximumHeightRequest="20" 
+        Padding="0"
+        Command="{Binding Source={x:Reference this}, Path=NextCommand}"/>
+</FlexLayout>

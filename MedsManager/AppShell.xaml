@@ -44,8 +44,8 @@
             </Tab.Icon>
 
             <ShellContent
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="NewThreadPage" />
+                ContentTemplate="{DataTemplate pages:CalendarPage}"
+                Route="CalendarPage" />
         </Tab>
         <Tab>
             <Tab.Icon>
