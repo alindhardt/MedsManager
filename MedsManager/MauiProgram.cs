@@ -23,9 +23,15 @@ namespace MedsManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddDbContext<MedsDbContext>();
             builder.Services.AddPages();
             builder.Services.AddViewModels();
             builder.Services.AddRepositories();
+
+            var dbContext = new MedsDbContext();
+            dbContext.Database.EnsureCreated();
+            dbContext.Dispose();
+
             return builder.Build();
         }
     }

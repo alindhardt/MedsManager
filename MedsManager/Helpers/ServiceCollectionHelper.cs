@@ -14,7 +14,7 @@ public static class ServiceCollectionHelper
 
     public static void AddRepositories(this IServiceCollection services)
     {
-        services.AddSingleton<IMedicineRepository, MockMedicineRepository>();
+        services.AddSingleton<IMedicineRepository, SQLiteMedicineRepository>();
     }
 
     public static void AddViewModels(this IServiceCollection services)
