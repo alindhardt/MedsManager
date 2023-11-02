@@ -23,7 +23,10 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Text="{Binding Id, StringFormat='Id: {0}'}" FontSize="Micro"/>
-                            <Label Grid.Row="1" Text="{Binding Name}" FontSize="Subtitle"/>
+                            <HorizontalStackLayout Grid.Row="1" Spacing="10">
+                                <Label Text="{Binding Name}" FontSize="Subtitle" VerticalTextAlignment="End"/>
+                                <Label Text="{Binding DosePerUnitText,StringFormat='({0})'}" FontSize="Micro" VerticalTextAlignment="End"/>
+                            </HorizontalStackLayout>
                             <Label Grid.Row="2" Text="{Binding Description}"/>
                         </Grid>
                     </ViewCell>

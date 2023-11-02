@@ -12,13 +12,17 @@ public class MockMedicineRepository : IMedicineRepository
         {
             Id= Guid.NewGuid(),
             Name = "Blue pill",
-            Description = "You wake up in your bed and believe whatever you want to believe."
+            Description = "You wake up in your bed and believe whatever you want to believe.",
+            DosePerUnit = 500,
+            UnitOfMeasurement = MassUnit.Milligram
         },
         new Medicine
         {
             Id = Guid.NewGuid(),
             Name = "Red pill",
-            Description = "You stay in Wonderland, and I show you how deep the rabbit hole goes."
+            Description = "You stay in Wonderland, and I show you how deep the rabbit hole goes.",
+            DosePerUnit = 500,
+            UnitOfMeasurement = MassUnit.Milligram
         }
     };
 
