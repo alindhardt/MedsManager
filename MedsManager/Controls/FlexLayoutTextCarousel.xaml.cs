@@ -41,24 +41,6 @@ public partial class FlexLayoutTextCarousel : FlexLayout
         }
     }
 
-    #region Bindable property TextColor
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
-        propertyName: nameof(TextColor),
-        returnType: typeof(Color),
-        declaringType: typeof(FlexLayoutTextCarousel),
-        defaultBindingMode: BindingMode.OneWay);
-
-    public Color TextColor
-    {
-        get => (Color)GetValue(TextColorProperty);
-        set
-        {
-            SetValue(TextColorProperty, value);
-        }
-    }
-
-    #endregion
-
     public static readonly BindableProperty TextProperty = BindableProperty.Create(
         nameof(Text),
         typeof(string),

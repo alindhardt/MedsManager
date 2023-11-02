@@ -9,6 +9,7 @@ public static class ServiceCollectionHelper
     public static void AddPages(this IServiceCollection services)
     {
         services.AddSingleton<MedicineListPage>();
+        services.AddSingleton<CalendarPage>();
     }
 
     public static void AddRepositories(this IServiceCollection services)
@@ -19,5 +20,6 @@ public static class ServiceCollectionHelper
     public static void AddViewModels(this IServiceCollection services)
     {
         services.AddSingleton<MedicineListPageViewModel>();
+        services.AddSingleton<CalendarPageViewModel>();
     }
 }

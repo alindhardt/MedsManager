@@ -58,7 +58,7 @@
 
             <ShellContent
                 ContentTemplate="{DataTemplate local:MainPage}"
-                Route="ProfilePage" />
+                Route="MainPage" />
         </Tab>
 
 

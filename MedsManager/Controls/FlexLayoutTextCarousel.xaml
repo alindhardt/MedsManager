@@ -7,7 +7,7 @@
             AlignContent="Center">
     <Button 
         BackgroundColor="Transparent"
-        TextColor="Black"
+        TextColor="{AppThemeBinding Dark=White, Light=Black}"
         FontFamily="FAS" 
         Text="angle-left"
         MaximumHeightRequest="20" 
@@ -15,10 +15,10 @@
         Command="{Binding Source={x:Reference this}, Path=PreviousCommand}"/>
     <Label 
         Text="{Binding Source={x:Reference this}, Path=Text}"
-        TextColor="{Binding Source={x:Reference this}, Path=TextColor}"/>
+        TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
     <Button 
         BackgroundColor="Transparent"
-        TextColor="Black"
+        TextColor="{AppThemeBinding Dark=White, Light=Black}"
         FontFamily="FAS" 
         Text="angle-right"
         MaximumHeightRequest="20" 
