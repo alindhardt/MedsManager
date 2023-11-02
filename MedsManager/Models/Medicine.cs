@@ -14,7 +14,7 @@ public class Medicine
 
     public double DosePerUnit { get; set; }
     public MassUnit UnitOfMeasurement { get; set; }
-
+    public int Quantity { get; set; }
 
 
     public string DosePerUnitText => $"{DosePerUnit} {AbbreviatedUnitOfMeasurement}";

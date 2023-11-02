@@ -14,7 +14,8 @@ public class MockMedicineRepository : IMedicineRepository
             Name = "Blue pill",
             Description = "You wake up in your bed and believe whatever you want to believe.",
             DosePerUnit = 500,
-            UnitOfMeasurement = MassUnit.Milligram
+            UnitOfMeasurement = MassUnit.Milligram,
+            Quantity = 1
         },
         new Medicine
         {
@@ -22,7 +23,8 @@ public class MockMedicineRepository : IMedicineRepository
             Name = "Red pill",
             Description = "You stay in Wonderland, and I show you how deep the rabbit hole goes.",
             DosePerUnit = 500,
-            UnitOfMeasurement = MassUnit.Milligram
+            UnitOfMeasurement = MassUnit.Milligram,
+            Quantity = 2
         }
     };
 
