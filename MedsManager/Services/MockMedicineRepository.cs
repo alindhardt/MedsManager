@@ -39,9 +39,7 @@ public class MockMedicineRepository : IMedicineRepository
     {
         await SimulateDelayAsync();
 
-        var index = _random.Next(_meds.Count);
-
-        return _meds[index];
+        return _meds.SingleOrDefault(m => m.Id == id);
     }
 
     private async Task SimulateDelayAsync()
