@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:converters="clr-namespace:MedsManager.Converters"
+      xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+      x:Class="MedsManager.Controls.GridWithEntryAndFontAwesomeIcon"
+      x:Name="self">
+    <Grid.Resources>
+        <converters:FontAwesomeStyleToStringConverter x:Key="fontStyleConverter"/>
+    </Grid.Resources>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Entry Grid.ColumnSpan="2" 
+           Text="{Binding Source={x:Reference self}, Path=EntryText}" 
+           Placeholder="{Binding Source={x:Reference self}, Path=EntryPlaceholder}"
+           FontSize="{Binding Source={x:Reference self}, Path=EntryFontSize}"
+           TextColor="{Binding Source={x:Reference self}, Path=EntryTextColor}"
+           Keyboard="{Binding Source={x:Reference self}, Path=EntryKeyboard}">
+        <Entry.Behaviors>
+            <toolkit:EventToCommandBehavior EventName="TextChanged" 
+                                    Command="{Binding Source={x:Reference self}, Path=EntryTextChangedCommand}" />
+        </Entry.Behaviors>
+    </Entry>
+    <Label Grid.Column="1"
+       Text="{Binding Source={x:Reference self}, Path=FontAwesomeIcon}" 
+       FontFamily="{Binding Source={x:Reference self}, Path=FontAwesomeStyle, Converter={StaticResource fontStyleConverter}}" 
+       VerticalTextAlignment="Center" Padding="0,0,10,0"/>
+</Grid>

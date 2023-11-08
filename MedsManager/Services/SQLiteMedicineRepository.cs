@@ -34,10 +34,22 @@ public class SQLiteMedicineRepository : IMedicineRepository
     }
 
     public async Task<IEnumerable<Medicine>> GetAllMedsAsync()
-        => await dbContext.Meds.ToListAsync();
+    {
+        var list = await dbContext.Meds.AsNoTracking().ToListAsync();
+        return list;
+    }
 
     public async Task<Medicine> GetByIdAsync(Guid id)
-        => await dbContext.Meds.SingleOrDefaultAsync(x => x.Id == id);
+    {
+        var med = await dbContext.Meds.AsNoTracking().SingleOrDefaultAsync(m => m.Id == id);
+        return med;
+    }
+
+    public async Task<bool> UpdateAsync(Medicine medicine)
+    {
+        dbContext.Entry(await dbContext.Meds.FirstOrDefaultAsync(m => m.Id == medicine.Id)).CurrentValues.SetValues(medicine);
+        return (await dbContext.SaveChangesAsync()) > 0;
+    }
 
     private void SeedDummyData()
     {

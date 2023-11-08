@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:MedsManager.Models"
+             xmlns:controls="clr-namespace:MedsManager.Controls"
+             x:Class="MedsManager.Pages.MedicineDetailsPage"
+             xmlns:fontAwesome="clr-namespace:MedsManager.Helpers">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding NavigatedToCommand}"/>
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:EnumToIntConverter x:Key="EnumToIntConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <controls:GridWithEntryAndFontAwesomeIcon FontAwesomeStyle="Solid" FontAwesomeIcon="pills"
+                                                      EntryPlaceholder="Name" EntryFontSize="Large"
+                                                      EntryText="{Binding Name.Value}"
+                                                      EntryTextChangedCommand="{Binding ValidateCommand}"/>
+            <Label Text="{Binding Name.FirstErrorMessage}" 
+                   TextColor="{StaticResource ErrorColor}"
+                   FontSize="Caption"
+                   IsVisible="{Binding Name.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
+            <Editor Text="{Binding Medicine.Description}" AutoSize="TextChanges" Placeholder="Description"/>
+            <Frame Padding="15,5,15,0" Margin="0,0,0,10" 
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                <VerticalStackLayout>
+                    <Label Text="Quantity" FontSize="Caption"/>
+                    <controls:GridWithEntryAndFontAwesomeIcon FontAwesomeIcon="sort" FontAwesomeStyle="Solid"
+                                                              EntryFontSize="Large" EntryKeyboard="Numeric"
+                                                              EntryText="{Binding Quantity.Value}"
+                                                              EntryTextChangedCommand="{Binding ValidateCommand}"/>
+                    <Label Text="{Binding Quantity.FirstErrorMessage}" 
+                           TextColor="{StaticResource ErrorColor}"
+                           FontSize="Caption"
+                           IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Padding="15,5,15,0" Margin="0,0,0,10"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Dose per Unit" FontSize="Caption"/>
+                    <controls:GridWithEntryAndFontAwesomeIcon Grid.ColumnSpan="2" Grid.Row="1" FontAwesomeIcon="sort" FontAwesomeStyle="Solid"
+                                                              EntryFontSize="Large" EntryKeyboard="Numeric"
+                                                              EntryText="{Binding DosePerUnit.Value}"
+                                                              EntryTextChangedCommand="{Binding ValidateCommand}"/>
+                    <Picker Grid.Column="2" Grid.Row="1"
+                            FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="End"
+                            ItemsSource="{Binding AllMassUnits}" 
+                            SelectedIndex="{Binding SelectedMassUnit, Converter={StaticResource EnumToIntConverter}, ConverterParameter={x:Type models:MassUnit}}"/>
+
+                    <Label Text="{Binding DosePerUnit.FirstErrorMessage}" 
+                           TextColor="{StaticResource ErrorColor}"
+                           FontSize="Caption"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="2"
+                           IsVisible="{Binding DosePerUnit.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
+                </Grid>
+            </Frame>
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Save" Command="{Binding SaveCommand}"/>
+                <Button Text="Cancel" 
+                        BackgroundColor="{StaticResource Tertiary}"
+                        TextColor="{AppThemeBinding Dark=White, Light={StaticResource SystemGray5Dark}}"
+                        Command="{Binding CancelCommand}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

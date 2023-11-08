@@ -6,5 +6,6 @@ namespace MedsManager.Services
     {
         Task<IEnumerable<Medicine>> GetAllMedsAsync();
         Task<Medicine> GetByIdAsync(Guid id);
+        Task<bool> UpdateAsync(Medicine medicine);
     }
 }

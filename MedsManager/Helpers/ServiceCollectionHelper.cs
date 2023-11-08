@@ -1,4 +1,5 @@
-﻿using MedsManager.Pages;
+﻿using CommunityToolkit.Maui;
+using MedsManager.Pages;
 using MedsManager.Services;
 using MedsManager.ViewModels;
 
@@ -6,20 +7,25 @@ namespace MedsManager.Helpers;
 
 public static class ServiceCollectionHelper
 {
-    public static void AddPages(this IServiceCollection services)
+    public static void AddMyServices(this IServiceCollection services)
     {
-        services.AddSingleton<MedicineListPage>();
-        services.AddSingleton<CalendarPage>();
-    }
-
-    public static void AddRepositories(this IServiceCollection services)
-    {
+        //repos
         services.AddSingleton<IMedicineRepository, SQLiteMedicineRepository>();
-    }
 
-    public static void AddViewModels(this IServiceCollection services)
-    {
-        services.AddSingleton<MedicineListPageViewModel>();
-        services.AddSingleton<CalendarPageViewModel>();
+        //pages
+        services.AddTransient<CalendarPage>();
+        services.AddTransient<MedicineDetailsPage>();
+        services.AddTransient<MedicineListPage>();
+
+        //view models
+        services.AddTransient<CalendarPageViewModel>();
+        services.AddTransient<MedicineDetailsPageViewModel>();
+        services.AddTransient<MedicineListPageViewModel>();
+
+        //db contexts
+        services.AddDbContext<MedsDbContext>();
+
+        using var dbContext = new MedsDbContext();
+        dbContext.Database.EnsureCreated();
     }
 }

@@ -2,20 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MedsManager.Pages.MedicineListPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:MedsManager.ViewModels"
              Title="Meds">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding LoadMedsCommand}"/>
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <VerticalStackLayout>
         <ListView 
             x:Name="listMeds" 
             HasUnevenRows="True" 
             ItemsSource="{Binding Meds}" 
-            SelectionMode="None"
             RefreshCommand="{Binding LoadMedsCommand}"
             IsPullToRefreshEnabled="True"
-            IsRefreshing="{Binding IsRetrievingMeds}">
+            IsRefreshing="{Binding IsRetrievingMeds}"
+            SelectionMode="None">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    Command="{Binding MedicineTappedCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell BindingContext="">
+                    <ViewCell>
                         <Grid Padding="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

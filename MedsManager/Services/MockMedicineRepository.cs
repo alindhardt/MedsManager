@@ -42,6 +42,11 @@ public class MockMedicineRepository : IMedicineRepository
         return _meds.SingleOrDefault(m => m.Id == id);
     }
 
+    public Task<bool> UpdateAsync(Medicine medicine)
+    {
+        throw new NotImplementedException();
+    }
+
     private async Task SimulateDelayAsync()
     {
         await Task.Delay(_random.Next(50, 400));

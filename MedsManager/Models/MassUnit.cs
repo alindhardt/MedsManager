@@ -1,4 +1,6 @@
-﻿public enum MassUnit
+﻿namespace MedsManager.Models;
+
+public enum MassUnit
 {
     Microgram,
     Milligram,

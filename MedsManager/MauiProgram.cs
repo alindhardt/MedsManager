@@ -1,4 +1,5 @@
-﻿using MedsManager.Helpers;
+﻿using CommunityToolkit.Maui;
+using MedsManager.Helpers;
 using MedsManager.Services;
 using Microsoft.Extensions.Logging;
 
@@ -11,6 +12,7 @@ namespace MedsManager
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -23,14 +25,7 @@ namespace MedsManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddDbContext<MedsDbContext>();
-            builder.Services.AddPages();
-            builder.Services.AddViewModels();
-            builder.Services.AddRepositories();
-
-            var dbContext = new MedsDbContext();
-            dbContext.Database.EnsureCreated();
-            dbContext.Dispose();
+            builder.Services.AddMyServices();
 
             return builder.Build();
         }

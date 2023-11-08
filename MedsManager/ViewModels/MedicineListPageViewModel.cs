@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MedsManager.Models;
 using MedsManager.Services;
 using System.Collections.ObjectModel;
@@ -17,16 +18,31 @@ public partial class MedicineListPageViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    Medicine selectedMedicine;
+
+    [ObservableProperty]
     ObservableCollection<Medicine> meds = new();
 
     [ObservableProperty]
     bool isRetrievingMeds;
 
     public Command LoadMedsCommand { get; }
-    public async Task LoadMedsAsync()
+
+    async Task LoadMedsAsync()
     {
         IsRetrievingMeds = true;
         Meds = new ObservableCollection<Medicine>(await medicineRepository.GetAllMedsAsync());
         IsRetrievingMeds = false;
+    }
+
+    [RelayCommand]
+    async Task MedicineTappedAsync(Medicine med)
+    {
+        var parameters = new Dictionary<string, object>
+        {
+            { "Medicine", med }
+        };
+
+        await Shell.Current.GoToAsync("medicine/details", parameters);
     }
 }
