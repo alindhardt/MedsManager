@@ -7,11 +7,16 @@
       x:Name="self">
     <Grid.Resources>
         <converters:FontAwesomeStyleToStringConverter x:Key="fontStyleConverter"/>
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter"/>
     </Grid.Resources>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="Auto"/>
     </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
     <Entry Grid.ColumnSpan="2" 
            Text="{Binding Source={x:Reference self}, Path=EntryText}" 
            Placeholder="{Binding Source={x:Reference self}, Path=EntryPlaceholder}"
@@ -24,7 +29,12 @@
         </Entry.Behaviors>
     </Entry>
     <Label Grid.Column="1"
-       Text="{Binding Source={x:Reference self}, Path=FontAwesomeIcon}" 
-       FontFamily="{Binding Source={x:Reference self}, Path=FontAwesomeStyle, Converter={StaticResource fontStyleConverter}}" 
-       VerticalTextAlignment="Center" Padding="0,0,10,0"/>
+           Text="{Binding Source={x:Reference self}, Path=FontAwesomeIcon}" 
+           FontFamily="{Binding Source={x:Reference self}, Path=FontAwesomeStyle, Converter={StaticResource fontStyleConverter}}" 
+           VerticalTextAlignment="Center" Padding="0,0,10,0"/>
+    <Label Grid.Row="1" Grid.ColumnSpan="2"
+           Text="{Binding Source={x:Reference self}, Path=ErrorLabelText}"
+           FontSize="Caption"
+           TextColor="{StaticResource ErrorColor}"
+           IsVisible="{Binding Source={x:Reference self}, Path=ErrorLabelText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"/>
 </Grid>

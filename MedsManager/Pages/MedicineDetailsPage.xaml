@@ -23,11 +23,8 @@
             <controls:GridWithEntryAndFontAwesomeIcon FontAwesomeStyle="Solid" FontAwesomeIcon="pills"
                                                       EntryPlaceholder="Name" EntryFontSize="Large"
                                                       EntryText="{Binding Name.Value}"
-                                                      EntryTextChangedCommand="{Binding ValidateCommand}"/>
-            <Label Text="{Binding Name.FirstErrorMessage}" 
-                   TextColor="{StaticResource ErrorColor}"
-                   FontSize="Caption"
-                   IsVisible="{Binding Name.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
+                                                      EntryTextChangedCommand="{Binding ValidateCommand}"
+                                                      ErrorLabelText="{Binding Name.FirstErrorMessage}"/>
             <Editor Text="{Binding Medicine.Description}" AutoSize="TextChanges" Placeholder="Description"/>
             <Frame Padding="15,5,15,0" Margin="0,0,0,10" 
                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
@@ -36,43 +33,33 @@
                     <controls:GridWithEntryAndFontAwesomeIcon FontAwesomeIcon="sort" FontAwesomeStyle="Solid"
                                                               EntryFontSize="Large" EntryKeyboard="Numeric"
                                                               EntryText="{Binding Quantity.Value}"
-                                                              EntryTextChangedCommand="{Binding ValidateCommand}"/>
-                    <Label Text="{Binding Quantity.FirstErrorMessage}" 
-                           TextColor="{StaticResource ErrorColor}"
-                           FontSize="Caption"
-                           IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
+                                                              EntryTextChangedCommand="{Binding ValidateCommand}"
+                                                              ErrorLabelText="{Binding Quantity.FirstErrorMessage}"/>
                 </VerticalStackLayout>
             </Frame>
             <Frame Padding="15,5,15,0" Margin="0,0,0,10"
                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <VerticalStackLayout>
                     <Label Text="Dose per Unit" FontSize="Caption"/>
-                    <controls:GridWithEntryAndFontAwesomeIcon Grid.ColumnSpan="2" Grid.Row="1" FontAwesomeIcon="sort" FontAwesomeStyle="Solid"
-                                                              EntryFontSize="Large" EntryKeyboard="Numeric"
-                                                              EntryText="{Binding DosePerUnit.Value}"
-                                                              EntryTextChangedCommand="{Binding ValidateCommand}"/>
-                    <Picker Grid.Column="2" Grid.Row="1"
-                            FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="End"
-                            ItemsSource="{Binding AllMassUnits}" 
-                            SelectedIndex="{Binding SelectedMassUnit, Converter={StaticResource EnumToIntConverter}, ConverterParameter={x:Type models:MassUnit}}"/>
-
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:GridWithEntryAndFontAwesomeIcon FontAwesomeIcon="sort" FontAwesomeStyle="Solid"
+                                                                  EntryFontSize="Large" EntryKeyboard="Numeric"
+                                                                  EntryText="{Binding DosePerUnit.Value}"
+                                                                  EntryTextChangedCommand="{Binding ValidateCommand}"/>
+                        <Picker Grid.Column="1"
+                                FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="End"
+                                FlowDirection="RightToLeft" 
+                                ItemsSource="{Binding AllMassUnits}" 
+                                SelectedIndex="{Binding SelectedMassUnit, Converter={StaticResource EnumToIntConverter}, ConverterParameter={x:Type models:MassUnit}}"/>
+                    </Grid>
                     <Label Text="{Binding DosePerUnit.FirstErrorMessage}" 
-                           TextColor="{StaticResource ErrorColor}"
-                           FontSize="Caption"
-                           Grid.ColumnSpan="2"
-                           Grid.Row="2"
+                           TextColor="{StaticResource ErrorColor}" FontSize="Caption"
                            IsVisible="{Binding DosePerUnit.IsValid, Converter={StaticResource InvertedBoolConverter}}"/>
-                </Grid>
+                </VerticalStackLayout>
             </Frame>
             <VerticalStackLayout Spacing="10">
                 <Button Text="Save" Command="{Binding SaveCommand}"/>

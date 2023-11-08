@@ -10,6 +10,20 @@ public partial class GridWithEntryAndFontAwesomeIcon : Grid
 		InitializeComponent();
 	}
 
+    public static readonly BindableProperty ErrorLabelTextProperty = BindableProperty.Create(
+nameof(ErrorLabelText),
+typeof(string),
+typeof(GridWithEntryAndFontAwesomeIcon));
+
+    public string ErrorLabelText
+    {
+        get => (string)GetValue(ErrorLabelTextProperty);
+        set
+        {
+            SetValue(ErrorLabelTextProperty, value);
+        }
+    }
+
     public static readonly BindableProperty EntryFontSizeProperty = BindableProperty.Create(
 nameof(EntryFontSize),
 typeof(double),
